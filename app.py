@@ -27,7 +27,7 @@ st.markdown("### 📊 Enter Sensor Readings:")
 
 # 3. User se inputs lene ke liye sliders aur text boxes banate hain
 # Format: st.slider(Label, Min_Value, Max_Value, Default_Value)
-cycle_num = st.slider("🔄 Cycle Number (Kitni baar use hui)", min_value=1, max_value=500, value=2)
+cycle_num = st.slider("🔄 Cycle Number (Kitni baar use hui)", min_value=1, max_value=1000, value=2)
 voltage = st.slider("⚡ Voltage Measured (V)", min_value=0.0, max_value=5.0, value=3.6, step=0.1)
 current = st.slider("🔌 Current Measured (A)", min_value=-5.0, max_value=5.0, value=-2.0, step=0.1)
 temperature = st.slider("🌡️ Temperature Measured (°C)", min_value=10.0, max_value=70.0, value=44.0, step=0.5)
