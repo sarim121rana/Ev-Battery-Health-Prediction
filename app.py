@@ -1,4 +1,4 @@
-import streamlit as pd
+import pandas as pd
 import streamlit as st
 import pickle
 import numpy as np
@@ -44,7 +44,7 @@ if st.button("🔮 Predict Battery Health", type="primary"):
     
     # State of Health (SoH) % nikaalte hain (Original Max Capacity = 1.85 Ah)
     original_capacity = 1.85
-    soh_percentage = (predicted_capacity / original_capacity) * 100
+    soh_percentage = ((predicted_capacity / original_capacity) * 100,100)
     
     # Screen par result display karte hain
     st.markdown("### 🏆 Prediction Results:")
@@ -56,12 +56,13 @@ if st.button("🔮 Predict Battery Health", type="primary"):
         st.metric(label="State of Health (SoH)", value=f"{soh_percentage:.2f}%")
         
     # Progress bar graphical look ke liye
-    if soh_percentage > 80:
-        st.progress(int(soh_percentage))
-        st.success("🍏 Battery ekdum badhiya condition me hai!")
-    elif soh_percentage > 60:
-        st.progress(int(soh_percentage))
-        st.warning("⚠️ Battery dheere-dheere degrade ho rahi hai.")
-    else:
-        st.progress(int(soh_percentage))
-        st.error("🚨 Danger! Battery badalne ka waqt aa gaya hai.")
+    progress_value = max(0, min(int(soh_percentage), 100))
+
+st.progress(progress_value)
+
+if soh_percentage > 80:
+    st.success("🍏 Battery ekdum badhiya condition me hai!")
+elif soh_percentage > 60:
+    st.warning("⚠️ Battery dheere-dheere degrade ho rahi hai.")
+else:
+    st.error("🚨 Danger! Battery badalne ka waqt aa gaya hai.")
