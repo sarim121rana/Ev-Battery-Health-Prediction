@@ -44,7 +44,7 @@ if st.button("🔮 Predict Battery Health", type="primary"):
     
     # State of Health (SoH) % nikaalte hain (Original Max Capacity = 1.85 Ah)
     original_capacity = 1.85
-    soh_percentage = ((predicted_capacity / original_capacity) * 100,100)
+    soh_percentage = min((predicted_capacity / original_capacity) * 100,100)
     
     # Screen par result display karte hain
     st.markdown("### 🏆 Prediction Results:")
