@@ -105,17 +105,17 @@ if st.button("🔮 Predict Battery Health", type="primary"):
         # Stored buffer ko DataFrame me convert karna taaki rolling metrics nikal saken
         history_df = pd.DataFrame(st.session_state.sensor_history)
         
-        # Live rolling features calculate karna
+       # Live rolling features calculate karna
         v_mean = float(history_df['Voltage'].mean())
         t_mean = float(history_df['Temperature'].mean())
         
-        # Agar sirf 1 reading hai memory me, toh standard deviation 0 hoga
-        v_std = float(history_df['Voltage'].std()) if len(history_df) > 1 else 0.0
-        t_std = float(history_df['Temperature'].std()) if len(history_df) > 1 else 0.0
+        # Agar sirf 1 reading hai memory me, toh standard deviation NaN hoga
+        v_std = float(history_df['Voltage'].std()) if len(history_df) > 1 else np.nan
+        t_std = float(history_df['Temperature'].std()) if len(history_df) > 1 else np.nan
         
         # Handle NaN values safely agar calculations me koi issue aaye
-        if np.isnan(v_std): v_std = 0.0
-        if np.isnan(t_std): t_std = 0.0
+        if np.isnan(v_std): v_std = np.nan
+        if np.isnan(t_std): t_std = np.nan
 
         # Model pure 8 features dhoondh raha hai, toh input data isi strict order me banaya hai
         input_features = np.array([
